@@ -2,7 +2,7 @@
 
 ![](https://raw.githubusercontent.com/mafredri/python-cec-apkg/master/source/CONTROL/icon.png)
 
-This package provides the [trainman419/python-cec](https://github.com/trainman419/python-cec) python module along with a python interpreter for ASUSTOR ADM.
+This package provides the [trainman419/python-cec](https://github.com/trainman419/python-cec) python module along with a python interpreter for ASUSTOR ADM. It can be used in conjunction with the Pulse-Eight USB-CEC Adapter to program your TV-remote to perform commands on your NAS (assuming the TV supports CEC).
 
 ## Instructions
 
