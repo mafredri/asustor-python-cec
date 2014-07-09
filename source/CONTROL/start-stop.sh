@@ -1,14 +1,12 @@
 #!/bin/sh -e
 
-NAME=libcec
-PKG_PATH=/usr/local/AppCentral/libcec
+NAME=python-cec
+PKG_PATH=/usr/local/AppCentral/python-cec
 
 . /lib/lsb/init-functions
 
 start_daemon () {
-    # Load kernel module
-    MOD_PATH=$PKG_PATH/modules
-    lsmod | grep -q '^cdc_acm' || insmod ${MOD_PATH}/cdc-acm.ko || true
+    true
 }
 
 stop_daemon () {
