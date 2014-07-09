@@ -1,5 +1,7 @@
 # python-cec-apkg
 
+![](https://raw.githubusercontent.com/mafredri/python-cec-apkg/master/source/CONTROL/icon.png)
+
 This package provides the [trainman419/python-cec](https://github.com/trainman419/python-cec) python module along with a python interpreter for ASUSTOR ADM.
 
 ## Instructions
