@@ -1,0 +1,24 @@
+{
+  "general": {
+    "package": "python-cec",
+    "name": "Python CEC",
+    "version": "APKG_VERSION",
+    "depends": ["libcec"],
+    "conflicts": [],
+    "developer": "Austin Hendrix",
+    "maintainer": "mafredri",
+    "email": "mafredri+adm@gmail.com",
+    "website": "https://github.com/trainman419/python-cec",
+    "architecture": "ADM_ARCH",
+    "firmware": "2.2.0"
+  },
+  "register": {
+    "boot-priority": {
+      "stop-order": 80,
+      "start-order": 20
+    },
+    "symbolic-link": {
+      "/bin": ["python2-cec"]
+    }
+  }
+}
