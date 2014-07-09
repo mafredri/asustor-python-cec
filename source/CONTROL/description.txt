@@ -1,3 +1,1 @@
-libCEC allows you in combination with the right hardware to control your device with your TV remote control. Utilising your existing HDMI cabling.
-
-The cec-client command-line tool can be used to send and receive commands.
+This package provides a cec module for python along with a python interpreter. It can be used in conjunction with the Pulse-Eight USB-CEC Adapter to program your TV-remote to perform commands on your NAS (assuming the TV supports CEC).
