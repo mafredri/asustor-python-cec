@@ -30,7 +30,7 @@ VERSION=$(<version.txt)
 # ARCH:PREFIX
 ADM_ARCH=(
     "x86-64:/cross/x86_64-asustor-linux-gnu"
-    # "i386:/cross/i686-asustor-linux-gnu"
+    "i386:/cross/i686-asustor-linux-gnu"
 )
 
 # Set hostname (ssh) from where to fetch the files
@@ -69,50 +69,33 @@ for arch in ${ADM_ARCH[@]}; do
     fi
 
     WORK_DIR=build/$arch
-    if [ ! -d $WORK_DIR ]; then
-        mkdir -p $WORK_DIR
-    fi
+    [ ! -d $ARCH_LIB ] && mkdir $ARCH_LIB
+
+    ARCH_LIB=$ROOT/source/lib-$arch
+    [ ! -d $WORK_DIR ] && mkdir -p $WORK_DIR
+
     echo "Cleaning out ${WORK_DIR}..."
-    rm -rf $WORK_DIR
-    mkdir $WORK_DIR
-    chmod 0755 $WORK_DIR
+    rm -rf $WORK_DIR/*
 
-    echo "Unpacking files..."
-    TMP_DIR=$(mktemp -d /tmp/$PACKAGE.XXXXXX)
-    (cd $TMP_DIR; for pkg in $ROOT/$PKG_DIR/*/*.tbz2; do tar xjf $pkg; done)
-
-    echo "Grabbing required files..."
-    for file in $KEEP_FILES; do
-        mv $TMP_DIR/$file $WORK_DIR
-    done
-
-    rm -rf $TMP_DIR
-
-    # Merge lib and lib64
-    if [ -d $WORK_DIR/lib64 ]; then
-        if [ ! -d $WORK_DIR/lib ]; then
-            mkdir $WORK_DIR/lib
-        fi
-        mv $WORK_DIR/lib64/* $WORK_DIR/lib/
-        rmdir $WORK_DIR/lib64
-        (cd $WORK_DIR; ln -sf lib lib64)
-    fi
-
-    echo "Copying apkg skeleton..."
-    rsync -ra source/* $WORK_DIR
-
-    echo "Finalizing..."
-    echo "Setting version to ${VERSION}"
-    sed -i '' -e "s^ADM_ARCH^${arch}^" -e "s^APKG_VERSION^${VERSION}^" $WORK_DIR/CONTROL/config.json
-
-    echo "Building APK..."
-    # APKs require root privileges, make sure priviliges are correct
-    sudo chown -R 0:0 $WORK_DIR
-    sudo scripts/apkg-tools.py create $WORK_DIR --destination dist/
-    sudo chown -R $(whoami) dist
-
-    # Reset permissions on working directory
-    sudo chown -R $(whoami) $WORK_DIR
+    echo "Unpacking and grabbing files..."
+    (cd $WORK_DIR;
+        for pkg in $ROOT/$PKG_DIR/*/*.tbz2; do
+            tar xjf $pkg;
+        done
+        find . -type d -name "python2.7" -exec cp -af {} $ARCH_LIB \;)
 
     echo "Done!"
 done
+
+TMP_DIR=$(mktemp -d /tmp/$PACKAGE.XXXXXX)
+cp -af source/* $TMP_DIR
+
+echo "Finalizing..."
+echo "Setting version to ${VERSION}"
+sed -i '' -e "s^ADM_ARCH^any^" -e "s^APKG_VERSION^${VERSION}^" $TMP_DIR/CONTROL/config.json
+
+echo "Building APK..."
+# APKs require root privileges, make sure priviliges are correct
+sudo chown -R 0:0 $TMP_DIR
+sudo scripts/apkg-tools.py create $TMP_DIR --destination dist/
+sudo chown -R $(whoami) dist

@@ -16,9 +16,6 @@
     "boot-priority": {
       "stop-order": 80,
       "start-order": 20
-    },
-    "symbolic-link": {
-      "/bin": ["python2-cec"]
     }
   }
 }

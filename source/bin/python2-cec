@@ -1,7 +1,0 @@
-#!/bin/sh
-LIBCEC_PATH=/usr/local/AppCentral/libcec
-PKG_PATH=/usr/local/AppCentral/python-cec
-export PATH=$PKG_PATH/bin:$PATH
-export LD_LIBRARY_PATH=$LIBCEC_PATH/lib:$PKG_PATH/lib:$LD_LIBRARY_PATH
-
-python2.7 "$@"
