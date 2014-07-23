@@ -30,7 +30,7 @@ VERSION=$(<version.txt)
 # ARCH:PREFIX
 ADM_ARCH=(
     "x86-64:/cross/x86_64-asustor-linux-gnu"
-    # "i386:/cross/i686-asustor-linux-gnu"
+    "i386:/cross/i686-asustor-linux-gnu"
 )
 
 # Set hostname (ssh) from where to fetch the files
