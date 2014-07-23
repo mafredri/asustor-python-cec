@@ -3,7 +3,7 @@
     "package": "python-cec",
     "name": "Python CEC",
     "version": "APKG_VERSION",
-    "depends": ["libcec"],
+    "depends": ["libcec", "python"],
     "conflicts": [],
     "developer": "Austin Hendrix",
     "maintainer": "mafredri",

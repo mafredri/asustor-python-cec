@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APKG_PKG_DIR=/usr/local/AppCentral/deluge
+PKG_DIR=/usr/local/AppCentral/python-cec
 
 case "$APKG_PKG_STATUS" in
 	install)
@@ -10,5 +10,7 @@ case "$APKG_PKG_STATUS" in
 	*)
 		;;
 esac
+
+(cd ${PKG_DIR}; ln -sf lib-${AS_NAS_ARCH} lib)
 
 exit 0

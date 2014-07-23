@@ -1,2 +1,6 @@
+0.2.2-r1:
+- Add support for i386 architecture.
+- Integrate with ASUSTOR Python package.
+
 0.2.2:
 - Initial release
